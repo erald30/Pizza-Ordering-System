@@ -1,16 +1,16 @@
 package org.piccolino.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "Order_Item")
+@Table(name = "pc_order_item")
 @Getter @Setter
 public class OrderItem {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "product_id")
@@ -18,6 +18,4 @@ public class OrderItem {
     @Column(name = "order_id")
     private int orderID;
     private  int quantity;
-
-
 }

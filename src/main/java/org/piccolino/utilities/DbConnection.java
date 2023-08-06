@@ -22,12 +22,12 @@ public class DbConnection {
                         System.out.println("Pswd" + System.getenv("MYSQL_PSWD"));
                         System.out.println("USR" + System.getenv("MYSQL_USR"));
                         Properties prop = new Properties();
-                        prop.setProperty(Environment.URL,"\"jdbc:mysql://localhost:3306/piccolino\"");
+                        prop.setProperty(Environment.URL,"jdbc:mysql://localhost:3306/piccolino");
                         prop.setProperty(Environment.HBM2DDL_AUTO, "update");
-                        prop.setProperty(Environment.SHOW_SQL, "false");
+                        prop.setProperty(Environment.SHOW_SQL, "true");
                         prop.setProperty(Environment.FORMAT_SQL, "false");
-                        prop.setProperty(Environment.USER, System.getenv("MYSQL_PSWD"));
-                        prop.setProperty(Environment.PASS, System.getenv("MYSQL_USR"));
+                        prop.setProperty(Environment.USER, System.getenv("MYSQL_USER"));
+                        prop.setProperty(Environment.PASS, System.getenv("MYSQL_PSWD"));
                         prop.setProperty(Environment.DIALECT , "org.hibernate.dialect.MySQLDialect");
                         prop.setProperty(Environment.DRIVER, "com.mysql.cj.jdbc.Driver");
                         prop.setProperty(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");

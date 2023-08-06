@@ -8,7 +8,7 @@ import lombok.Setter;
 import java.util.Date;
 
 @Entity
-@Table(name = "Order")
+@Table(name = "pc_order")
 @Getter @Setter
 public class Order {
 

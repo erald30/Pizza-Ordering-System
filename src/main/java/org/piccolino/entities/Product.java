@@ -7,7 +7,7 @@ import lombok.Setter;
 import java.util.List;
 
 @Entity
-@Table(name = "Product")
+@Table(name = "pc_product")
 @Getter @Setter
 public class Product {
 
@@ -20,14 +20,5 @@ public class Product {
     private String productName;
 
     private double price;
-
-
-    private List<Product> productList;
-
-
-
-
-
-
 
 }
