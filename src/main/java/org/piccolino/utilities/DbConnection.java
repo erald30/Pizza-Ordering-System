@@ -1,6 +1,6 @@
 package org.piccolino.utilities;
 
-import org.piccolino.Order_Item;
+import org.piccolino.entities.Order_Item;
 import org.piccolino.entities.Order;
 import org.piccolino.entities.Product;
 import org.hibernate.SessionFactory;

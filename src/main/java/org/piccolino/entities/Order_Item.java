@@ -1,4 +1,4 @@
-package org.piccolino;
+package org.piccolino.entities;
 
 import jakarta.persistence.Entity;
 
