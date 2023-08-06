@@ -1,7 +1,7 @@
-package Utilities;
+package org.piccolino.utilities;
 
-import entities.Order;
-import entities.Product;
+import org.piccolino.entities.Order;
+import org.piccolino.entities.Product;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
