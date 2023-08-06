@@ -1,5 +1,6 @@
 package org.piccolino.utilities;
 
+import org.piccolino.Order_Item;
 import org.piccolino.entities.Order;
 import org.piccolino.entities.Product;
 import org.hibernate.SessionFactory;
@@ -36,6 +37,7 @@ public class DbConnection {
                         config.addPackage("entities");
                         config.addAnnotatedClass(Order.class);
                         config.addAnnotatedClass(Product.class);
+                        config.addAnnotatedClass(Order_Item.class);
 
 
                         ServiceRegistry serviceRegistry =  new StandardServiceRegistryBuilder()
