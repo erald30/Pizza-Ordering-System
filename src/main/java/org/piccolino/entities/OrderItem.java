@@ -14,8 +14,18 @@ public class OrderItem {
     private int id;
 
     @Column(name = "product_id")
-    private  int productID;
+    private  int productId;
+
     @Column(name = "order_id")
-    private int orderID;
+    private int orderId;
+
+    @ManyToOne
+    @JoinColumn(name = "order_id", insertable = false, updatable = false)
+    private Order order;
+
+    @ManyToOne
+    @JoinColumn(name = "product_id", insertable = false, updatable = false)
+    private Product product;
+
     private  int quantity;
 }
