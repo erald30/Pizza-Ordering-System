@@ -23,7 +23,7 @@ public class ProductRepository {
                 Session session = sessionFactory.openSession();
                 tx = session.beginTransaction();
 
-                session.createQuery("from Product").getResultList();
+                result = session.createQuery("from Product").getResultList();
 
                 tx.commit();
             } catch (Exception ex) {
@@ -47,14 +47,7 @@ public class ProductRepository {
                                 .setParameter("title", title)
                                 .getResultList();
 
-
-
                         result = tmpResult.size() > 0 ? tmpResult.get(0) : null;
-                        // Same as
-                        /*if (tmpResult.size() > 0)
-                            result = tmpResult.get(0);
-                        else
-                            result = null;*/
 
                         tx.commit();
                     } catch (Exception ex) {
@@ -64,6 +57,28 @@ public class ProductRepository {
                         }
                     }
                     return result;
+        }
+
+        public Product getById(int id){
+            Transaction tx = null;
+            Product result = null;
+
+            try{
+                Session session = sessionFactory.openSession();
+                tx = session.beginTransaction();
+
+                result = (Product) session.createQuery("from Product p where p.id = :id")
+                        .setParameter("id", id)
+                        .getSingleResult();
+
+                tx.commit();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                if(tx != null){
+                    tx.rollback();
+                }
+            }
+            return result;
         }
 
     public void save(Product model) {

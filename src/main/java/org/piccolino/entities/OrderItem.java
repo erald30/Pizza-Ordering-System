@@ -1,12 +1,14 @@
 package org.piccolino.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Table(name = "pc_order_item")
 @Getter @Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class OrderItem {
 
     @Id
@@ -27,5 +29,7 @@ public class OrderItem {
     @JoinColumn(name = "product_id", insertable = false, updatable = false)
     private Product product;
 
-    private  int quantity;
+    private int quantity;
+
+    private double total;
 }

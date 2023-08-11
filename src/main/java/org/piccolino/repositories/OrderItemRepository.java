@@ -3,6 +3,7 @@ package org.piccolino.repositories;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.piccolino.entities.Order;
 import org.piccolino.entities.OrderItem;
 import org.piccolino.entities.Product;
 
@@ -36,6 +37,24 @@ public class OrderItemRepository {
         }
         return result;
 
+    }
+
+    public void save(OrderItem orderItem){
+        Transaction tx = null;
+
+        try {
+            Session session = sessionFactory.openSession();
+            tx = session.beginTransaction();
+
+            session.persist(orderItem);
+
+            tx.commit();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            if (tx != null) {
+                tx.rollback();
+            }
+        }
     }
 }
 

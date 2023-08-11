@@ -19,13 +19,11 @@ public class DbConnection {
             synchronized (SessionFactory.class){
                 if(FACTORY == null){
                     try{
-                        System.out.println("Pswd" + System.getenv("MYSQL_PSWD"));
-                        System.out.println("USR" + System.getenv("MYSQL_USR"));
                         Properties prop = new Properties();
                         prop.setProperty(Environment.URL,"jdbc:mysql://localhost:3306/piccolino");
                         prop.setProperty(Environment.HBM2DDL_AUTO, "update");
-                        prop.setProperty(Environment.SHOW_SQL, "true");
-                        prop.setProperty(Environment.FORMAT_SQL, "true");
+                        prop.setProperty(Environment.SHOW_SQL, "false");
+                        prop.setProperty(Environment.FORMAT_SQL, "false");
                         prop.setProperty(Environment.USER, System.getenv("MYSQL_USER"));
                         prop.setProperty(Environment.PASS, System.getenv("MYSQL_PSWD"));
                         prop.setProperty(Environment.DIALECT , "org.hibernate.dialect.MySQLDialect");
