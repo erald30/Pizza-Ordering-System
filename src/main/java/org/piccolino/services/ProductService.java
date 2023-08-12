@@ -1,8 +1,8 @@
 package org.piccolino.services;
 
 import lombok.RequiredArgsConstructor;
-import org.piccolino.entities.Order;
-import org.piccolino.entities.OrderItem;
+import org.piccolino.dto.OrderCreate;
+import org.piccolino.dto.ProductQuantity;
 import org.piccolino.entities.Product;
 import org.piccolino.repositories.ProductRepository;
 
@@ -109,41 +109,19 @@ public class ProductService {
         System.out.println("*                                                                                       *");
     }
 
-    public void showOrderItems(Order order){
+    public void showOrderItems(OrderCreate order){
         System.out.println("*                  |------------------------------------------------|                   *");
         System.out.println("*                  |       <-- Produktet ne porosine tuaj -->       |                   *");
         System.out.println("*                  |------|--------------------------|--------|-----|                   *");
         System.out.println("*                  | ID   | Title                    | Price  | Qty |                   *");
         System.out.println("*                  |------|--------------------------|--------|-----|                   *");
 
-        for (OrderItem orderItem : order.getOrderItems()) {
+        for (ProductQuantity orderItem : order.getOrderItems()) {
             System.out.printf("*                  | %-5s| %-25s| %-7s| %-4s|                   *%n",
-                    orderItem.getProduct().getId(), orderItem.getProduct().getTitle(), orderItem.getProduct().getPrice(), orderItem.getQuantity());
+                    orderItem.getProductId(), orderItem.getProductTitle(), orderItem.getProductPrice(), orderItem.getQuantity());
         }
 
         System.out.println("*                  |______|__________________________|________|_____|                   *");
-        System.out.println("*                                                                                       *");
-    }
-
-    public void printInvoice(Order order){
-        System.out.println("*              |---------------------------------------------------------|              *");
-        System.out.println("*              |              <-- Fatura Juaj -->                        |              *");
-        System.out.println("*              |------|--------------------------|--------|-----|--------|              *");
-        System.out.println("*              | ID   | Title                    | Price  | Qty | SubTot |              *");
-        System.out.println("*              |------|--------------------------|--------|-----|--------|              *");
-
-        for (OrderItem orderItem : order.getOrderItems()) {
-            System.out.printf("*              | %-5s| %-25s| %-7sX %-4s| %-7s|              *%n",
-                    orderItem.getProduct().getId(),
-                    orderItem.getProduct().getTitle(),
-                    orderItem.getProduct().getPrice(),
-                    orderItem.getQuantity(),
-                    orderItem.getTotal());
-        }
-
-        System.out.println("*              |______|__________________________|________|_____|________|              *");
-        System.out.printf("*              |                                  TOTAL     %-9s    |              *%n", order.getTotalPrice());
-        System.out.println("*              |_________________________________________________________|              *");
         System.out.println("*                                                                                       *");
     }
 }

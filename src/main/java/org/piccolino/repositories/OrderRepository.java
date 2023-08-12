@@ -4,7 +4,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.piccolino.entities.Order;
-import org.piccolino.entities.Product;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +44,6 @@ public class OrderRepository {
             Session session = sessionFactory.openSession();
             tx = session.beginTransaction();
             session.persist(order);
-
             tx.commit();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -76,4 +74,7 @@ public class OrderRepository {
         return result;
     }
 
+    public SessionFactory getSessionFactory() {
+        return sessionFactory;
+    }
 }

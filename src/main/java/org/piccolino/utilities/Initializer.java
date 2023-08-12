@@ -2,6 +2,8 @@ package org.piccolino.utilities;
 
 import lombok.RequiredArgsConstructor;
 import org.hibernate.SessionFactory;
+import org.piccolino.dto.OrderCreate;
+import org.piccolino.dto.ProductQuantity;
 import org.piccolino.entities.Order;
 import org.piccolino.entities.OrderItem;
 import org.piccolino.entities.Product;
@@ -47,7 +49,7 @@ public class Initializer {
                     return;
                 }
                 case 1 -> {
-                    Order order = new Order();
+                    OrderCreate orderCreate = new OrderCreate();
                     while (true) {
 
                         productService.printProductsMenu();
@@ -61,7 +63,13 @@ public class Initializer {
                         System.out.print("*         Vendosni sasine per produktin e zgjedhur:");
                         int quantity = sc.nextInt();
 
-                        order.addOrderItem(p, quantity);
+                        ProductQuantity productQuantity = ProductQuantity.builder()
+                                .quantity(quantity)
+                                .productId(p.getId())
+                                .productTitle(p.getTitle())
+                                .productPrice(p.getPrice())
+                                .build();
+                        orderService.addProductQuantityToOrder(orderCreate, productQuantity);
 
                         System.out.println("*         Produkti u zgjodh me sukses.                                                  *");
 
@@ -71,16 +79,17 @@ public class Initializer {
                         if (option == 1) {
                             continue;
                         } else if (option == 2) {
-                            productService.showOrderItems(order);
+                            productService.showOrderItems(orderCreate);
                             System.out.print("*         Vendosni id e produktit qe doni te fshini:");
                             int idToBeDeleted = sc.nextInt();
-                            order.removeOrderItem(idToBeDeleted);
+                            orderService.removeProductFromOrder(idToBeDeleted, orderCreate);
                             System.out.println("*         Produkti u fshi me sukses!                                                    *");
                         } else if (option == 3) {
-                            orderService.completeOrder(order);
-                            orderService.saveOrderItems(order);
+                            Order newOrder = orderService.save(orderCreate);
+                            //orderService.completeOrder(order);
+                            //orderService.saveOrderItems(order);
                             System.out.println("*         Porosia juaj u perfundua me sukses.                                           *");
-                            productService.printInvoice(order);
+                            orderService.printInvoice(newOrder.getId());
                             break;
                         }
                     }
@@ -88,8 +97,7 @@ public class Initializer {
                 case 2 -> {
                     System.out.print("*         Vendosni ID e fatures qe po kerkoni:");
                     int orderId = sc.nextInt();
-                    Order order = orderService.getOrder(orderId);
-                    productService.printInvoice(order);
+                    orderService.printInvoice(orderId);
                 }
             }
         }
